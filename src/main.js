@@ -11,13 +11,11 @@ import * as utils from './utils.js';
 import * as audio from './audio.js';
 import * as canvas from './canvas.js';
 const drawParams = {
-  showGradient : true,
   showBars : true,
   showNoise : false,
   showCircles : true,
   showInvert : false,
   showEmboss : false
-
 };
 
 // 1 - here we are faking an enumeration
@@ -87,7 +85,7 @@ function setupUI(canvasElement){
 
   trebleSlider.oninput = e=>{
     //set the gain
-    audio.settreble(e.target.value);
+    audio.setTreble(e.target.value);
     
     //update treble label
     trebleLabel.innerHTML = e.target.value;
@@ -96,20 +94,20 @@ function setupUI(canvasElement){
   //set the vaule of label to match inital value of slider
   trebleSlider.dispatchEvent(new Event("input"));
 
-  //Treble
-  let trebleSlider = document.querySelector("#trebleSlider");
-  let trebleLabel = document.querySelector("#trebleLabel");
+  //bass
+  let bassSlider = document.querySelector("#bassSlider");
+  let bassLabel = document.querySelector("#bassLabel");
 
-  trebleSlider.oninput = e=>{
+  bassSlider.oninput = e=>{
     //set the gain
-    audio.settreble(e.target.value);
+    audio.setBass(e.target.value);
     
-    //update treble label
-    trebleLabel.innerHTML = e.target.value;
+    //update bass label
+    bassLabel.innerHTML = e.target.value;
   };
 
   //set the vaule of label to match inital value of slider
-  trebleSlider.dispatchEvent(new Event("input"));
+  bassSlider.dispatchEvent(new Event("input"));
 
 
   //D - hookup track <select>
@@ -124,16 +122,12 @@ function setupUI(canvasElement){
   };
 
   //Events for handling the check boxes.
-  let gradCheck = document.querySelector("#gradientCB");
+
   let barCheck =  document.querySelector("#barsCB");
   let circleCheck = document.querySelector("#circlesCB");
   let noiseCheck = document.querySelector("#noiseCB");
   let invertCheck = document.querySelector("#invertCB");
   let embossCheck = document.querySelector("#embossCB");
-
-  gradCheck.onclick = e=>{
-    drawParams.showGradient = !drawParams.showGradient;
-  };
 
   barCheck.onclick = e =>{
     drawParams.showBars = !drawParams.showBars;
