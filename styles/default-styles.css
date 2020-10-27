@@ -1,28 +1,25 @@
+/*Debug border:  border:dashed 2px red;*/
 body {
-	background: #eeeeee;
-	font-family: 'Rubik', sans-serif;
+	background: navy;
+  font-family: 'Rubik', sans-serif;
+  color: white;
+  padding:25px;
 }
 
 canvas {
-	margin-left: 1rem;
-	margin-top: 1rem;
-	margin-bottom: 1rem;
+
   z-index: 2;
   grid-area: 1/ 1/ 2/ 2;
 	
 }
 
 #tracks{
+  color: black;
   position: relative;
   left: 50%;
   top:25%;
   grid-area: 1/ 1/ 2/ 2;
   z-index: 3;
-}
-
-#controls{
-
-  margin-left: 1rem;
 }
 
 #volumeLabel{
@@ -34,42 +31,8 @@ section{
   display: block;
 }
 
-#playButton{
-  font-size: 1.2rem;
-  width: 6rem;
-  left:0;
-}
-
-button[data-playing="yes"]:after{
-  content: "Pause";
-}
-
-button[data-playing="no"]:after{
-  content: "Play";
-}
-
-#fsButton{
-  font-size: 1.2rem;
-  width: 8rem;
-  position: absolute;
-  left: 85%
-}
-
-
-#buttons{
-  position: absolute;
-  left: 35%;
-  z-index: 4;
-  top: 29.5%;
-  width: 30%;
-
-}
-
 #boombox{
   grid-area: 1/ 1/ 2/ 2;
-  margin-left: 1rem;
-	margin-top: 1rem;
-  margin-bottom: 1rem;
   z-index: 1;
 
 }
@@ -80,27 +43,193 @@ button[data-playing="no"]:after{
   grid-template-columns: 400px 400px;
   height: 532px;
   width:816px; 
-  
 }
+
 h1{
   text-align: center;
 }
 
 #content{
   display: flex;
+  flex-direction: row-reverse;
   justify-content: center;
 
-}	/*box-shadow: 4px 4px 8px rgba(0,0,0,0.5);*/
+}	
 
+
+/*Controls*/
 #sliders{
+ 
   display: flex;
+  position: static;
+  flex-direction: column;
+  justify-content: left;
+  height: 500px;
+  left: 16.5rem;
+  width: 17rem;
+  font-size:  18pt;
+  background-color: #eb9c0b;
+}
+
+.sliderSec{
+  display:inline-flexbox;
   flex-direction: row;
-  justify-content:center;
+  justify-content: center;
+
+}
+
+.sTexts{
+  display:inline-block;
+  
+}
+
+#volumeLabel, #bassLabel, #trebleLabel{
+
+  position: relative;
+  display: inline-block;
+  bottom: .5rem;
+  min-width: 40px;
 }
 
 #checks{
+  justify-content: space-around;
   display: flex;
   flex-direction: row;
-  margin-right: 10px;
-  justify-content:space-between;
+  margin:15px;
+}
+
+.cbSpan{
+  margin: 2rem;
+  font-size: 18pt;
+}
+
+#fsButton, #playButton{
+  font-size: 1.2rem;
+  width: 9rem;
+}
+
+#fsButton, #playButton{
+  margin-left: 2rem;
+  background-color: #f8a407;
+  border-radius: 5px;
+  border:  none;
+  height: 4rem;
+  font-size: 18pt;
+  
+}
+
+button[data-playing="yes"]:after{
+  content: "Pause";
+}
+
+button[data-playing="no"]:after{
+  content: "Play";
+}
+
+#buttons{
+  grid-area: 1/ 1/ 2 /2;
+  top: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+
+/*Fullscreen Options*/
+#forFS{
+  grid-area: 1/ 1/ 2/ 2;
+  position: absolute;
+  display: grid;
+  grid-template-rows: 250px 250px;
+  grid-template-columns: 400px 400px;
+  width: 800px;
+  height: 500px;
+}
+
+#forFS:-webkit-full-screen>canvas {
+  width: 100% !important;
+  position: absolute;
+  display: block;
+  top:0;
+  left:0;
+}
+#forFS:-moz-full-screen>canvas {
+  width: 100% !important;
+  position: absolute;
+  display: block;
+  top:0;
+  left:0;
+}
+#forFS:-ms-fullscreen>canvas {
+  width: 100% !important;
+  position: absolute;
+  display: block;
+  top:0;
+  left:0;
+}
+#forFS:fullscreen>canvas {
+  width: 100% !important;
+  position: absolute;
+  display: block;
+  top:0;
+  left:0;
+}
+
+#forFS:-webkit-full-screen>img {
+  width: 100% !important;
+  position: absolute;
+  display: inline-block;
+  height: 100% !important;
+  border: dashed 2px blue;
+  top:0;
+  left:0;
+  object-fit: fill;
+}
+#forFS:-moz-full-screen>img {
+  width: 100% !important;
+  position: absolute;
+  display: inline-block;
+  height: 100% !important;
+  border: dashed 2px blue;
+  top:0;
+  left:0;
+  object-fit: fill;
+}
+#forFS:-ms-fullscreen>img {
+  width: 100% !important;
+  position: absolute;
+  display: inline-block;
+  height: 100% !important;
+  border: dashed 2px blue;
+  top:0;
+  left:0;
+  object-fit: fill;
+}
+
+#forFS:fullscreen>img {
+  width: 100% !important;
+  position: absolute;
+  height: 100% !important;
+  border: dashed 2px blue;
+  top:0;
+  left:0;
+  object-fit: fill;
+}
+
+#forFS:-webkit-full-screen {
+
+  position: relative !important;
+  display: block !important;
+}
+#forFS:-moz-full-screen{
+  position: relative !important;
+  display: block !important;
+}
+#forFS:-ms-fullscreen{
+  position: relative !important;
+  display: block !important;
+}
+#forFS:fullscreen{
+  position: relative !important;
+  display: block !important;
 }

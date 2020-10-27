@@ -31,13 +31,13 @@ function draw(params={}){
 	// notice these arrays are passed "by reference" 
     analyserNode.getByteFrequencyData(audioData);
     analyserNode.getByteTimeDomainData(timeData);
-	
+   
 	
 	// 2 - draw the waveform/bar background
     ctx.save();
     ctx.fillStyle = "rgb(153, 153, 153)";
     
-    ctx.clearRect(135, 53, 550, 75);
+    ctx.fillRect(135, 53, 540, 75);
     ctx.restore();
 	//draw waveform
 	if(params.showWaves){
@@ -107,10 +107,7 @@ function clear(){
 function drawBassSlider(bass){
 
         let tempPerc = bass/40;
-        if(tempPerc != 0){
         bassBox.y = 415 - (220 * tempPerc);
-        }
-
         ctx.save()
         ctx.clearRect(300, 180, 80, 400);
         ctx.fillStyle = "rgb(102, 102, 102)";
@@ -152,4 +149,4 @@ function drawTime(audioElement){
     ctx.restore();
     
 }
-export {setupCanvas, draw, clear, drawBassSlider, drawTrebleSlider, drawTime};
+export {ctx, setupCanvas, draw, clear, drawBassSlider, drawTrebleSlider, drawTime};

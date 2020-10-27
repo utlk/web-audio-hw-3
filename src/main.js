@@ -15,8 +15,8 @@ const drawParams = {
   showWaves : false
 };
 
-let bassVal;
-let trebleVal;
+
+
 // 1 - here we are faking an enumeration
 const DEFAULTS = Object.freeze({
 	sound1  :  "media/New Adventure Theme.mp3"
@@ -33,15 +33,14 @@ function init(){
 }
 
 function setupUI(canvasElement){
-  let tempImg = document.querySelector("#boombox");
+  let fsContainer = document.querySelector("#forFS");
   // A - hookup fullscreen button
   const fsButton = document.querySelector("#fsButton");
 	
   // add .onclick event to button
   fsButton.onclick = e => {
     console.log("init called");
-    utils.goFullscreen(canvasElement);
-    utils.goFullscreen(tempImg);
+    utils.goFullscreen(fsContainer);
   };
 
   playButton.onclick = e => {
@@ -144,7 +143,6 @@ function loop(){
     requestAnimationFrame(loop);
     canvas.draw(drawParams);
     canvas.drawTime(audio.element);
-    
   }
 
 export {init};
