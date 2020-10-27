@@ -10,16 +10,14 @@
 <body>
 <main>
 	<h1>Boombox</h1>
-	<section>
-		<canvas id="canvas" width="800" height="400"></canvas>
-		<canvas id="bBoxCanvas" width="800" height="400"></canvas>
-	</section>
-	<div id="controls">
-		<section>
-			<button id="playButton" data-playing="no"></button>
-			<button id="fsButton">Full Screen</button>
+	<section id="content">
+		<div id="divContent">
 		
-			<label>Track: 
+		<img id="boombox" src="/img/boombox.svg" width="800" height="500">
+		<canvas id="canvas" width="800" height="500"></canvas>
+		
+		<section id ="tracks">
+			<label id="trackLabel">Now Playing: 
 				<select id="trackSelect">
 					<option value="media/New Adventure Theme.mp3" selected>New Adventure Theme</option>
 					<option value="media/Peanuts Theme.mp3">Peanuts Theme</option>
@@ -27,7 +25,20 @@
 				</select>
 			</label>
 		</section>
+	</div>
 		
+	</section>
+	<div id="controls">
+		<div id= "buttons">
+			<section >
+			<button id="playButton" data-playing="no"></button>
+			<button id="fsButton">Full Screen</button>
+		
+			
+		</section>
+		</div>
+	
+	<div id="sliders">
 		<section>
 			Volume: <input type="range" id="volumeSlider" min="0" max="2" value="1" step="0.01">
 			<span id="volumeLabel">???</span>
@@ -42,14 +53,14 @@
 			Treble: <input type="range" id="trebleSlider" min="0" max = "40" value = "0" step="1">
 			<span id = "trebleLabel">???</span>
 		</section>
+	</div>
 
+		<div id="checks">
 		<section>
 			<span><input type="checkbox" id="barsCB" checked><label for="barsCB">Show Bars</label></span>
-			<span><input type="checkbox" id="circlesCB" checked><label for="circlesCB">Show Circles</label></span>
-			<span><input type="checkbox" id="noiseCB" unchecked><label for="noiseCB">Show Noise</label></span>
-			<span><input type="checkbox" id="invertCB" unchecked><label for="invertCB">Show Invert</label></span>
-			<span><input type="checkbox" id="embossCB" unchecked><label for="embossCB">Show Emboss</label></span>
+			<span><input type="checkbox" id="waveCB" unchecked><label for="waveCB">Show Waveform</label></span>
 		  </section>
+		  </div>
 	</div>
 </main>
 </body>

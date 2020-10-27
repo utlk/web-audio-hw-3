@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="800"
+   height="500"
+   viewBox="0 0 211.66666 132.29167"
+   version="1.1"
+   id="svg32"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="Boombox.svg">
+  <defs
+     id="defs26" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="331.30406"
+     inkscape:cy="129.80443"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer4"
+     inkscape:document-rotation="0"
+     showgrid="true"
+     units="px"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid36" />
+    <sodipodi:guide
+       position="21.166666,132.29167"
+       orientation="1,0"
+       id="guide934" />
+    <sodipodi:guide
+       position="203.72916,113.77084"
+       orientation="1,0"
+       id="guide936" />
+    <sodipodi:guide
+       position="10.583333,111.125"
+       orientation="0,-1"
+       id="guide938" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata29">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline"
+     sodipodi:insensitive="true">
+    <rect
+       style="fill:#b3b3b3;stroke-width:0.264583"
+       id="rect38"
+       width="211.66666"
+       height="132.29167"
+       x="0"
+       y="-5.50293e-06" />
+    <rect
+       style="fill:#999999;stroke:#454545;stroke-width:1.32292;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect40"
+       width="145.52083"
+       height="21.166666"
+       x="34.395832"
+       y="13.229167" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Speakers">
+    <circle
+       style="fill:#000000;stroke:#454545;stroke-width:1.32292;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path868"
+       cx="40.065475"
+       cy="91.848206"
+       r="34.395832" />
+    <circle
+       style="fill:#000000;stroke:#454545;stroke-width:1.32292;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path868-2"
+       cx="171.64647"
+       cy="91.384323"
+       r="34.395832" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Knobs">
+    <circle
+       style="fill:#333333;stroke:#454545;stroke-width:1.32292;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path894"
+       cx="16.441965"
+       cy="24.190475"
+       r="10.583333" />
+    <circle
+       style="fill:#333333;stroke:#454545;stroke-width:1.32292;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path894-4"
+       cx="197.30359"
+       cy="23.623512"
+       r="10.583333" />
+    <circle
+       style="fill:#ff0000;stroke:none;stroke-width:1.32292;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path917"
+       cx="21.166666"
+       cy="21.166666"
+       r="2.6458333" />
+    <circle
+       style="fill:#ff0000;stroke:none;stroke-width:1.32292;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path917-3"
+       cx="-203.3512"
+       cy="20.977678"
+       r="2.6458333"
+       transform="scale(-1,1)" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Slider ">
+    <rect
+       style="fill:#666666;stroke:none;stroke-width:1.32292;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect943"
+       width="2.6458333"
+       height="58.208332"
+       x="89.958336"
+       y="58.208332" />
+    <rect
+       style="fill:#666666;stroke:none;stroke-width:1.32292;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect943-9"
+       width="2.6458333"
+       height="58.208332"
+       x="119.0625"
+       y="58.208336" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:8.29157px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20729"
+       x="79.409813"
+       y="126.46772"
+       id="text962"><tspan
+         sodipodi:role="line"
+         id="tspan960"
+         x="79.409813"
+         y="126.46772"
+         style="stroke-width:0.20729">Bass</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:8.29156px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20729"
+       x="111.15981"
+       y="126.46772"
+       id="text962-0"><tspan
+         sodipodi:role="line"
+         x="111.15981"
+         y="126.46772"
+         style="stroke-width:0.20729"
+         id="tspan982">Treble</tspan></text>
+  </g>
+</svg>

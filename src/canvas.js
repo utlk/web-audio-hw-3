@@ -9,57 +9,84 @@
 
 import * as utils from './utils.js';
 
-let ctx,canvasWidth,canvasHeight,gradient,analyserNode,audioData;
-
-
+let ctx,canvasWidth,canvasHeight,analyserNode,audioData,timeData;
+let firstRun = true;
+let bassBox = {x:315, y:415};
+let trebleBox = {x:425, y:415};
 function setupCanvas(canvasElement,analyserNodeRef){
 	// create drawing context
 	ctx = canvasElement.getContext("2d");
 	canvasWidth = canvasElement.width;
 	canvasHeight = canvasElement.height;
-	// create a gradient that runs top to bottom
-	gradient = utils.getLinearGradient(ctx,0,0,0,canvasHeight,[{percent:0,color:"blue"},{percent:.25,color:"green"},{percent:.5,color:"yellow"},{percent:.75,color:"red"},{percent:1,color:"magenta"}]);
+	
 	// keep a reference to the analyser node
 	analyserNode = analyserNodeRef;
 	// this is the array where the analyser data will be stored
-	audioData = new Uint8Array(analyserNode.fftSize / 2);
+    audioData = new Uint8Array(analyserNode.fftSize / 2);
+    timeData = new Uint8Array(analyserNode.fftSize / 2);
 }
 
 function draw(params={}){
   // 1 - populate the audioData array with the frequency data from the analyserNode
 	// notice these arrays are passed "by reference" 
-	analyserNode.getByteFrequencyData(audioData);
-	// OR
-	//analyserNode.getByteTimeDomainData(audioData); // waveform data
+    analyserNode.getByteFrequencyData(audioData);
+    analyserNode.getByteTimeDomainData(timeData);
 	
-	// 2 - draw background
+	
+	// 2 - draw the waveform/bar background
     ctx.save();
-    ctx.fillStyle = "black";
-    ctx.globalAlpha = .1;
-    ctx.fillRect(0,0, canvasWidth, canvasHeight);
+    ctx.fillStyle = "rgb(153, 153, 153)";
+    
+    ctx.clearRect(135, 53, 550, 75);
     ctx.restore();
-	// 3 - draw gradient
-	if(params.showGradient){
-   //   ctx.save();
-   //   ctx.fillStyle = gradient;
-   //   ctx.globalAlpha = .3;
-   //   ctx.fillRect(0,0, canvasWidth, canvasHeight);
-   //   ctx.restore();
+	//draw waveform
+	if(params.showWaves){
+        let waveWidth = (550/timeData.length);
+        let x = 135;
+        
+        ctx.save();
+        ctx.linewidth = 10;
+        ctx.beginPath();
+        let i =0;
+        while( i < timeData.length && x <650){
+            
+            let waveHeight = timeData[i] / 128.0;
+            let y = waveHeight * 200 /2.3;
+            if (y > 120 )
+                y = 120;
+            
+            if (y < 55)
+             y=55;
+
+            ctx.strokeStyle = `rgb(${waveHeight+150}, 50, 59)`;
+            if (i === 0){
+                ctx.moveTo(x, y);
+            }
+            else{
+                ctx.lineTo(x, y );
+            }
+            x+=waveWidth;
+            i++;
+        }
+        ctx.lineTo(675, 90);
+        ctx.stroke();
+        ctx.restore();
     }
-	// 4 - draw bars
+
+    //Draw bar graph
 	if(params.showBars){
 
         let visCanvasHeight = 100;
-        let barSpacing = 5;
         let barWidth = (550 / audioData.length) * 2.5;
         let x = 150;
         let i = 0;
+        ctx.save();
         while(i<audioData.length && x < 650){
            let barHeight = audioData[i];
             
             ctx.fillStyle = `rgb(${barHeight+150}, 50, 59)`;
-            ctx.fillRect  (x,visCanvasHeight - barHeight/4, barWidth, barHeight/ 4);
-            ctx.strokeRect(x, visCanvasHeight - barHeight/4, barWidth -barSpacing, barHeight/ 4);
+            ctx.fillRect  (x,visCanvasHeight - barHeight/6, barWidth, barHeight/ 6);
+            ctx.strokeRect(x, visCanvasHeight - barHeight/6, barWidth, barHeight/ 6);
             
             x+= barWidth + 1;
             i++;
@@ -67,88 +94,62 @@ function draw(params={}){
         ctx.restore();
 
     }
-	// 5 - draw circles
-	if (params.showCircles){
-        let maxRadius = canvasHeight/4;
-        ctx.save();
-        ctx.globalAlpha = 0.5;
-        for(let i=0; i<audioData.length; i++){
-            let percent = audioData[i]/ 255;
+  
+      
 
-            //Red circles
-            let circleRadius =percent * maxRadius;
-            ctx.beginPath();
-            ctx.fillStyle = utils.makeColor(255, 111, 111, .34 -percent/3.0);
-            ctx.arc(canvasWidth/2, canvasHeight/2, circleRadius, 0, 2 * Math.PI, false);
-            ctx.fill();
-            ctx.closePath();
+    }
 
-            //Blue Circles
-            ctx.beginPath();
-            ctx.fillStyle = utils.makeColor(0, 0, 255, .10 -percent/10.0);
-            ctx.arc(canvasWidth/2, canvasHeight/2, circleRadius * 1.5, 0, 2 * Math.PI, false);
-            ctx.fill();
-            ctx.closePath();
+function clear(){
+   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+}
 
-            //Yellow Circles
-            ctx.save();
-            ctx.beginPath();
-            ctx.fillStyle = utils.makeColor(200, 200, 0, .5 -percent/5.0);
-            ctx.arc(canvasWidth/2, canvasHeight/2, circleRadius * .50, 0, 2 * Math.PI, false);
-            ctx.fill();
-            ctx.closePath();
-            ctx.restore();
+//Corresponds the slider on the canvas to the one for actual
+function drawBassSlider(bass){
+
+        let tempPerc = bass/40;
+        if(tempPerc != 0){
+        bassBox.y = 415 - (220 * tempPerc);
         }
+
+        ctx.save()
+        ctx.clearRect(300, 180, 80, 400);
+        ctx.fillStyle = "rgb(102, 102, 102)";
+        ctx.fillRect(bassBox.x, bassBox.y , 60, 25);
         ctx.restore();
-    }
-
-    // 6 - bitmap manipulation
-	// TODO: right now. we are looping though every pixel of the canvas (320,000 of them!), 
-	// regardless of whether or not we are applying a pixel effect
-	// At some point, refactor this code so that we are looping though the image data only if
-	// it is necessary
-
-	// A) grab all of the pixels on the canvas and put them in the `data` array
-	// `imageData.data` is a `Uint8ClampedArray()` typed array that has 1.28 million elements!
-	// the variable `data` below is a reference to that array 
-    let imageData = ctx.getImageData(0, 0, canvasWidth, canvasHeight);
-    let data = imageData.data;
-    let length = data.length;
-    let width = imageData.width;
-	// B) Iterate through each pixel, stepping 4 elements at a time (which is the RGBA for 1 pixel)
-    for (let i=0; i< length; i+=4){
-		// C) randomly change every 20th pixel to red
-        if (params.showNoise && Math.random() < 0.05){
-
-			// data[i] is the red channel
-			// data[i+1] is the green channel
-			// data[i+2] is the blue channel
-            // data[i+3] is the alpha channel
-          
-            data[i+1] = 0;
-            data[i+2] = 143; // zero out the red and green and blue channels
-            data[i] = 255;// make the red channel 100% red
-        }  
-
-        if(params.showInvert){
-            let red = data[i], green = data[i+1], blue = data[i+2];
-            data[i] = 255 -red; //set red value
-            data[i+1] = 255 -green; //set green value
-            data[i+2] = 255 -blue; //set blue value
-        }
-    }
     
-    if(params.showEmboss){
-        for (let i=0; i < length; i++){
-            if(i%4 ==3)continue;
-            data[i] = 127 +2*data[i] - data[i+4] - data[i + width *4];
-        }
-    }
-	
-    // D) copy image data back to canvas
-    ctx.putImageData(imageData, 0, 0);
+}
 
+//Corresponds the slider on the canvas to the one for actual
+function drawTrebleSlider(treble){
+
+    let tempPerc2 = treble/40;
+    trebleBox.y = 415 - (220 * tempPerc2);
+    ctx.save()
+    ctx.clearRect(425, 180, 80, 400);
+    ctx.fillStyle = "rgb(102, 102, 102)";
+    ctx.fillRect(trebleBox.x, trebleBox.y , 60, 25);
+    ctx.restore();
 
 }
 
-export {setupCanvas,draw};
+function drawTime(audioElement){
+    let dur = audioElement.duration;
+    let curTime = audioElement.currentTime;
+    //Gets the minutes and seconds of the duration
+    let minsD = Math.floor(dur /60);
+    let secondsD = Math.ceil(dur - (minsD * 60));
+
+    //Get minutes and seconds of the playhead
+    let minsC =Math.floor(curTime /60);
+    let secondsC= Math.ceil(curTime - (minsC * 60));
+
+    //Write Text to the boom box;
+    
+    ctx.save();
+    ctx.clearRect(350, 0, 300, 50);
+    ctx.font = '36px Rubik';
+    ctx.fillText(`${minsC}:${secondsC} / ${minsD}:${secondsD} `, 340, 30);
+    ctx.restore();
+    
+}
+export {setupCanvas, draw, clear, drawBassSlider, drawTrebleSlider, drawTime};

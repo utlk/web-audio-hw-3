@@ -102,4 +102,4 @@ function setVolume(value){
     gainNode.gain.value = value;
 }
 
-export {audioCtx, setupWebaudio, playCurrentSound, pauseCurrentSound, loadSoundFile,setBass, setTreble, setVolume, analyserNode};
+export {element, audioCtx, setupWebaudio, playCurrentSound, pauseCurrentSound, loadSoundFile,setBass, setTreble, setVolume, analyserNode};

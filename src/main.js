@@ -12,12 +12,11 @@ import * as audio from './audio.js';
 import * as canvas from './canvas.js';
 const drawParams = {
   showBars : true,
-  showNoise : false,
-  showCircles : true,
-  showInvert : false,
-  showEmboss : false
+  showWaves : false
 };
 
+let bassVal;
+let trebleVal;
 // 1 - here we are faking an enumeration
 const DEFAULTS = Object.freeze({
 	sound1  :  "media/New Adventure Theme.mp3"
@@ -28,13 +27,13 @@ function init(){
 	console.log("init called");
 	console.log(`Testing utils.getRandomColor() import: ${utils.getRandomColor()}`);
   let canvasElement = document.querySelector("#canvas"); // hookup <canvas> element
-  let bBoxCanvas = document.querySelector("#bBoxCanvas");
-  setupUI(canvasElement);
   canvas.setupCanvas(canvasElement, audio.analyserNode);
+  setupUI(canvasElement);
   loop();
 }
 
 function setupUI(canvasElement){
+  let tempImg = document.querySelector("#boombox");
   // A - hookup fullscreen button
   const fsButton = document.querySelector("#fsButton");
 	
@@ -42,6 +41,7 @@ function setupUI(canvasElement){
   fsButton.onclick = e => {
     console.log("init called");
     utils.goFullscreen(canvasElement);
+    utils.goFullscreen(tempImg);
   };
 
   playButton.onclick = e => {
@@ -81,12 +81,13 @@ function setupUI(canvasElement){
 
   //Treble
   let trebleSlider = document.querySelector("#trebleSlider");
+  canvas.drawTrebleSlider(trebleSlider.value);
   let trebleLabel = document.querySelector("#trebleLabel");
 
   trebleSlider.oninput = e=>{
     //set the gain
     audio.setTreble(e.target.value);
-    
+    canvas.drawTrebleSlider(e.target.value);
     //update treble label
     trebleLabel.innerHTML = e.target.value;
   };
@@ -96,10 +97,12 @@ function setupUI(canvasElement){
 
   //bass
   let bassSlider = document.querySelector("#bassSlider");
+  canvas.drawBassSlider(bassSlider.value);
   let bassLabel = document.querySelector("#bassLabel");
 
   bassSlider.oninput = e=>{
     //set the gain
+    canvas.drawBassSlider(e.target.value);
     audio.setBass(e.target.value);
     
     //update bass label
@@ -124,36 +127,24 @@ function setupUI(canvasElement){
   //Events for handling the check boxes.
 
   let barCheck =  document.querySelector("#barsCB");
-  let circleCheck = document.querySelector("#circlesCB");
-  let noiseCheck = document.querySelector("#noiseCB");
-  let invertCheck = document.querySelector("#invertCB");
-  let embossCheck = document.querySelector("#embossCB");
+  let waveCheck = document.querySelector("#waveCB");
+ 
 
   barCheck.onclick = e =>{
     drawParams.showBars = !drawParams.showBars;
   };
 
-  circleCheck.onclick = e =>{
-    drawParams.showCircles = !drawParams.showCircles;
+  waveCheck.onclick = e =>{
+    drawParams.showWaves = !drawParams.showWaves;
   };
-
-  noiseCheck.onclick = e =>{
-    drawParams.showNoise = !drawParams.showNoise;
-  }
-
-  invertCheck.onclick = e =>{
-    drawParams.showInvert = !drawParams.showInvert;
-  }
-  embossCheck.onclick = e =>{
-    drawParams.showEmboss = !drawParams.showEmboss;
-  }
 } // end setupUI
 
 function loop(){
   /* NOTE: This is temporary testing code that we will delete in Part II */
     requestAnimationFrame(loop);
     canvas.draw(drawParams);
-     
+    canvas.drawTime(audio.element);
+    
   }
 
 export {init};

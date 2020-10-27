@@ -7,11 +7,21 @@ canvas {
 	margin-left: 1rem;
 	margin-top: 1rem;
 	margin-bottom: 1rem;
-	box-shadow: 4px 4px 8px rgba(0,0,0,0.5);
-	background: #fafafa;
+  z-index: 2;
+  grid-area: 1/ 1/ 2/ 2;
+	
+}
+
+#tracks{
+  position: relative;
+  left: 50%;
+  top:25%;
+  grid-area: 1/ 1/ 2/ 2;
+  z-index: 3;
 }
 
 #controls{
+
   margin-left: 1rem;
 }
 
@@ -20,12 +30,14 @@ canvas {
 }
 
 section{
-  margin-bottom: 1rem;
+  margin: auto;
+  display: block;
 }
 
 #playButton{
   font-size: 1.2rem;
   width: 6rem;
+  left:0;
 }
 
 button[data-playing="yes"]:after{
@@ -39,9 +51,56 @@ button[data-playing="no"]:after{
 #fsButton{
   font-size: 1.2rem;
   width: 8rem;
+  position: absolute;
+  left: 85%
 }
 
 
-#bBoxCanvas{
-  display: none;
+#buttons{
+  position: absolute;
+  left: 35%;
+  z-index: 4;
+  top: 29.5%;
+  width: 30%;
+
+}
+
+#boombox{
+  grid-area: 1/ 1/ 2/ 2;
+  margin-left: 1rem;
+	margin-top: 1rem;
+  margin-bottom: 1rem;
+  z-index: 1;
+
+}
+
+#divContent{
+  display: grid;
+  grid-template-rows: 250px 250px;
+  grid-template-columns: 400px 400px;
+  height: 532px;
+  width:816px; 
+  
+}
+h1{
+  text-align: center;
+}
+
+#content{
+  display: flex;
+  justify-content: center;
+
+}	/*box-shadow: 4px 4px 8px rgba(0,0,0,0.5);*/
+
+#sliders{
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+}
+
+#checks{
+  display: flex;
+  flex-direction: row;
+  margin-right: 10px;
+  justify-content:space-between;
 }
